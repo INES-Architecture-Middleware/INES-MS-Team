@@ -1,0 +1,202 @@
+openapi: 3.0.4
+info:
+  title: Team - INES
+  description: Teams manager API
+  version: 1.0.0
+servers:
+  - url: https://localhost/api/team
+tags:
+  - name: team
+    description: All of the Team management
+paths:
+  /team:
+    get:
+      tags:
+        - team
+      summary: Get all teams of a user
+      operationId: getTeams
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Team"
+        "500":
+          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      tags:
+        - team
+      summary: Create a new team
+      operationId: createTeam
+      requestBody:
+        description: Create a new team
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Team"
+      responses:
+        "201":
+          description: Team created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          description: Invalid input
+        "422":
+          description: Validation exception
+        "500":
+          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      tags:
+        - team
+      summary: Update an existing team
+      operationId: updateTeam
+      requestBody:
+        description: Update an existing team
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Team"
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          description: Invalid ID supplied
+        "401":
+          description: Not authorized
+        "403":
+          description: Forbidden
+        "404":
+          description: Team not found
+        "500":
+          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /team/{id}:
+    get:
+      tags:
+        - team
+      summary: Get a team by ID
+      operationId: getTeamById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Team"
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Team not found
+        "500":
+          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      tags:
+        - team
+      summary: Delete a team by ID
+      operationId: deleteTeam
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Team deleted
+        "400":
+          description: Invalid ID supplied
+        "404":
+          description: Team not found
+        "500":
+          description: Internal Server Error
+        default:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Team:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "0984ab"
+        team_name:
+          type: string
+          example: "stall"
+        pokemons:
+          type: array
+          items:
+            type: integer
+          example: [103, 1, 240]
+        user_id:
+          type: string
+          example: "fezfguzgf19afak"
+    Error:
+      type: object
+      required:
+        - status
+        - message
+      properties:
+        status:
+          type: integer
+          format: int32
+          description: HTTP status code
+          example: 400
+        message:
+          type: string
+          description: Error message
+          example: Invalid request
+        code:
+          type: string
+          description: Application-specific error code
+          example: INVALID_INPUT
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header
