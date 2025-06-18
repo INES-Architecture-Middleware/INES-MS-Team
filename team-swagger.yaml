@@ -43,7 +43,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Team"
+              $ref: "#/components/schemas/Team_post"
       responses:
         "201":
           description: Team created
@@ -74,14 +74,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Team"
+              $ref: "#/components/schemas/Team_put"
       responses:
         "200":
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Team"
+                $ref: "#/components/schemas/Team_put"
         "400":
           description: Invalid ID supplied
         "401":
@@ -176,6 +176,32 @@ components:
         user_id:
           type: string
           example: "fezfguzgf19afak"
+    Team_post:
+      type: object
+      properties:
+        team_name:
+          type: string
+          example: "stall"
+        pokemons:
+          type: array
+          items:
+            type: integer
+          example: [103, 1, 240]
+    Team_put:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "0984ab"
+        team_name:
+          type: string
+          example: "stall"
+        pokemons:
+          type: array
+          items:
+            type: integer
+          example: [103, 1, 240]
+          
     Error:
       type: object
       required:
