@@ -1,0 +1,19 @@
+meta {
+  name: Update an existing team
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{baseUrl}}/team
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "_id": "",
+    "team_name": "",
+    "pokemons": []
+  }
+}
