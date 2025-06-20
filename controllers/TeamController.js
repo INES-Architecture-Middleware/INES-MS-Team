@@ -75,8 +75,8 @@ class TeamController {
     }
 
     async find(req, res){
-        try{
-            let team = await functionsMongo.find(Team, {userId:req.body.user._id})
+        try {
+            let team = await functionsMongo.find(Team, {userId:req.user._id})
             res.json(team)
         }catch(err){
             console.log(err)
@@ -90,9 +90,8 @@ class TeamController {
             res.sendStatus(400)
             return
         }
-
         try{
-            let team = await functionsMongo.findOne(Team, {
+            const team = await functionsMongo.findOne(Team, {
               _id: req.params.id,
             });
             res.json(team)
