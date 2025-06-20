@@ -4,7 +4,7 @@ meta {
   seq: 3
 }
 
-put {
+post {
   url: {{baseUrl}}/team
   body: json
   auth: none
@@ -12,8 +12,12 @@ put {
 
 body:json {
   {
-    "_id": "",
-    "team_name": "",
-    "pokemons": []
+    "_id": "685510529f5e5b6f4f2774ef",
+    "name": "Best Team",
+    "pokemonIds": [1, 13, 96],
+    "user": {
+      "_id": "6855060609e7e3ba5a3041a8",
+      "username": "pedro"
+    }
   }
 }

@@ -6,6 +6,15 @@ meta {
 
 get {
   url: {{baseUrl}}/team
-  body: none
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "user": {
+      "_id": "6855060609e7e3ba5a3041a8",
+      "username": "pedro"
+    }
+  }
 }

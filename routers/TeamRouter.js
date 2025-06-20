@@ -7,22 +7,22 @@ class TeamRouter {
 
     this.router
       .route('/')
-      .get(authenticateJWT, async (req, res) => {
+      .get(async (req, res) => {
         await teamController.find(req, res);
       })
-      .put(authenticateJWT, async (req, res) => {
+      .put(async (req, res) => {
         await teamController.insert(req, res);
       })
-      .post(authenticateJWT, async (req, res) => {
+      .post(async (req, res) => {
         await teamController.update(req, res);
       });
 
     this.router
       .route('/:id')
-      .get(authenticateJWT, async (req, res) => {
+      .get(async (req, res) => {
         await teamController.findOne(req, res);
       })
-      .delete(authenticateJWT, async (req, res) => {
+      .delete(async (req, res) => {
         await teamController.delete(req, res);
       });
   }

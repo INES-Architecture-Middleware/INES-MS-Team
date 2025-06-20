@@ -5,11 +5,17 @@ meta {
 }
 
 get {
-  url: {{baseUrl}}/team/:id
+  url: {{baseUrl}}/team/{{id}}
   body: none
   auth: none
 }
 
-params:path {
-  id: 
+body:json {
+  {
+    "_id": "685510529f5e5b6f4f2774ef"
+  }
+}
+
+vars:pre-request {
+  id: 685510529f5e5b6f4f2774ef
 }
